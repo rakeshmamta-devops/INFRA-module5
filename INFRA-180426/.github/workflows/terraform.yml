@@ -1,0 +1,46 @@
+name: Terraform - Create Azure RG
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: |
+            {
+              "clientId": "a73a4fa6-da93-422e-ab16-3850f8b7559d",
+              "clientSecret": "cebd9f64-11ee-46a2-ab73-4bbcfaa3d262",
+              "subscriptionId": "0b430b86-4372-414d-a228-fbc54442f4eb",
+              "tenantId": "34c53e50-2ff5-4db4-b6f7-e8056c5ff6c2"
+            }
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
