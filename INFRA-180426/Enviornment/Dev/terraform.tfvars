@@ -8,8 +8,14 @@ rgs = {
     }
   }
   rgs02 = {
-    rg_name     = "dk_rg"
+    rg_name     = "dk_rg02"
     rg_location = "central india"
 
   }
+  rgs03 = {
+    rg_name     = "dk_rg03"
+    rg_location = "central india"
+
+  }
+
 }
